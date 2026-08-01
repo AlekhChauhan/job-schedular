@@ -9,6 +9,14 @@ public class Main {
         long now = System.currentTimeMillis();
         schedular.schedule(new Job("job-immediate", now,0,1,()->System.out.println("Running IMMEDIATE at"+System.currentTimeMillis())));
         schedular.schedule((new Job("job-delayed", now+2000,0,1,()->System.out.println("Running DELAYED at"+ System.currentTimeMillis()))));
+        schedular.schedule(new Job("job-repeating", now+500,1000,1,()->System.out.println("Running REPEATING at"+ System.currentTimeMillis())));
+        AtomicInteger failCount=new AtomicInteger(0);
+        schedular.schedule((new Job("job-flaky", now+100,0,1,()->{
+            if(failCount.getAndIncrement()<2){
+                throw new RuntimeException("simulated failure #"+ failCount.get());
+            }
+            System.out.println("job-flaky finally SUCCEEDED at"+ System.currentTimeMillis());
+        })));
         Thread.sleep(3000);
         int jobCount=100;
         AtomicInteger completedCount=new AtomicInteger(0);
