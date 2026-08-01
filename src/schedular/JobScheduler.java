@@ -57,7 +57,7 @@ public class JobScheduler {
                 } catch (Exception e) {
                     attempt++;
                     long backoffMillis=(long)Math.pow(2,attempt)*100L;
-                    System.out.println("["+job.getId()+"] attempt"+attempt+"failed ("+ e.getMessage()+"),retrying in"+ backoffMillis+"ms");
+                    System.out.println("["+job.getId()+"] attempt"+attempt+" failed ("+ e.getMessage()+"),retrying in "+ backoffMillis+"ms");
                     try {
                         Thread.sleep(backoffMillis);
                     }catch (InterruptedException ignored){
