@@ -2,13 +2,13 @@ package schedular;
 import java.util.PriorityQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-public class JobSchedular {
+public class JobScheduler {
     private final PriorityQueue<Job>heap=new PriorityQueue<>();
     private final ExecutorService pool;
     private volatile boolean running=true;
     private Thread dispatcherThread;
 
-    public JobSchedular(int poolSize){
+    public JobScheduler(int poolSize){
         this.pool=Executors.newFixedThreadPool(poolSize);
     }
     public synchronized void schedule(Job job){

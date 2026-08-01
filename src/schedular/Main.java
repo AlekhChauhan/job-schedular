@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        JobSchedular schedular = new JobSchedular(4);
+        JobScheduler schedular = new JobScheduler(4);
         schedular.start();
         long now = System.currentTimeMillis();
         schedular.schedule(new Job("job-immediate", now,0,1,()->System.out.println("Running IMMEDIATE at"+System.currentTimeMillis())));
